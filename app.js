@@ -6,6 +6,7 @@ import sessions from 'express-session'
 import msIdExpress from 'microsoft-identity-express'
 
 import gamePrepRoute from './routes/gamePrep.js'
+import gameRoute from './routes/game.js'
 import models from './models.js'
 
 import { fileURLToPath } from 'url';
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/gamePrep', gamePrepRoute)
+app.use('/game', gameRoute)
 
 app.use((req, res, next) => {
   req.models = models

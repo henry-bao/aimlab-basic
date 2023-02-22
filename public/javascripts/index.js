@@ -12,6 +12,9 @@ async function promptUsername() {
 
 async function startGame() {
   username = document.getElementById("username").value
+  let body = document.getElementById("homePage")
+  body.innerHTML = ""
   console.log("starting game...")
+
   console.log(username)
 }

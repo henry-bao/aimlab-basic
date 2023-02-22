@@ -1,9 +1,17 @@
-async function startGame() {
+let username = undefined;
+
+async function promptUsername() {
 
   // Get ready to start a game. Go to gamePrep route
-  console.log("start")
   let prepDiv = document.getElementById('prep')
   let prepResponse = await fetch('gamePrep')
   let prepHTML = await prepResponse.text()
   prepDiv.innerHTML = prepHTML
+
+}
+
+async function startGame() {
+  username = document.getElementById("username").value
+  console.log("starting game...")
+  console.log(username)
 }

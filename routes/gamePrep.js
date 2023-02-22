@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   res.send(`
     <p>Enter your username: </p>
     <input type="text" id="username"></input>
-    <button>Done</button>
+    <button onclick="startGame()">Done</button>
   `)
 });
 

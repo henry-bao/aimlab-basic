@@ -5,6 +5,7 @@ import logger from 'morgan';
 import sessions from 'express-session'
 import msIdExpress from 'microsoft-identity-express'
 
+import gamePrepRoute from './routes/gamePrep.js'
 import models from './models.js'
 
 import { fileURLToPath } from 'url';
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/gamePrep', gamePrepRoute)
 
 app.use((req, res, next) => {
   req.models = models

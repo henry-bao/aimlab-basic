@@ -31,7 +31,18 @@ async function startGame() {
   let gameHTML = await gameResponse.text()
   body.innerHTML = gameHTML
 
-  setTimeout(postGameResult, 10000)
+  // setTimeout(postGameResult, 10000)
+
+    let timeleft = 9;
+    let downloadTimer = setInterval(function(){
+      if(timeleft <= 0){
+        clearInterval(downloadTimer);
+        postGameResult();
+      }
+    document.getElementById("timer").innerHTML = timeleft + "s";
+    timeleft -= 1;
+  }, 1000);
+
 }
 
 async function postGameResult() {

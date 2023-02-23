@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
   res.type('html')
   res.send(`
     <div id="target">
-    <button onclick="changePosition()">Click here to start</button>
+    <button onclick="changePosition()">button</button>
     </div>
   `)
 });

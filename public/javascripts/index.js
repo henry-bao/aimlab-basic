@@ -27,6 +27,8 @@ async function startGame() {
 function changePosition() {
   let target = document.getElementById("target")
   console.log(target)
-  target.style.left = "15%"
-  target.style.top= "20%"
+  let leftRandom = Math.floor(Math.random() * 100);
+  let topRandom = Math.floor(Math.random() * 100);
+  target.style.left = leftRandom + "%"
+  target.style.top= topRandom + "%"
 }

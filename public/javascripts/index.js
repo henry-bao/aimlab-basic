@@ -1,5 +1,12 @@
 let username = undefined;
 let score = 0;
+let validClick = 0;
+let missClick = 0;
+let accuracy = -1;
+
+function miss() {
+  missClick++;
+}
 
 async function promptUsername() {
 
@@ -14,6 +21,7 @@ async function promptUsername() {
 }
 
 async function startGame() {
+  missClick = 0
   username = document.getElementById("username").value
   let body = document.getElementById("homePage")
   body.innerHTML = ""
@@ -25,8 +33,13 @@ async function startGame() {
 }
 
 function changePosition() {
+  score += 10
+  validClick ++
+  accuracy = validClick / missClick
+  console.log("hit: " + validClick)
+  console.log("miss: " + missClick)
+  console.log(accuracy)
   let target = document.getElementById("target")
-  console.log(target)
   let leftRandom = Math.floor(Math.random() * 100);
   let topRandom = Math.floor(Math.random() * 100);
   target.style.left = leftRandom + "%"

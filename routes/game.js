@@ -5,7 +5,9 @@ var router = express.Router();
 router.get('/', (req, res) => {
   res.type('html')
   res.send(`
-    <button id="target" onclick="changePosition()">Click here to start</button>
+    <div id="target">
+    <button onclick="changePosition()">Click here to start</button>
+    </div>
   `)
 });
 

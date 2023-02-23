@@ -1,4 +1,5 @@
 let username = undefined;
+let score = 0;
 
 async function promptUsername() {
 
@@ -26,6 +27,6 @@ async function startGame() {
 function changePosition() {
   let target = document.getElementById("target")
   console.log(target)
-  target.style.left = "344px"
-  target.style.top= "1000px"
+  target.style.left = "15%"
+  target.style.top= "20%"
 }

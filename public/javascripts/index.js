@@ -30,6 +30,14 @@ async function startGame() {
 
   let gameHTML = await gameResponse.text()
   body.innerHTML = gameHTML
+
+  setTimeout(postGameResult, 10000)
+}
+
+async function postGameResult() {
+  let response = await fetch('gameResult')
+  let responseText = await response.text()
+  console.log(responseText)
 }
 
 function changePosition() {

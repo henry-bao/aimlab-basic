@@ -46,9 +46,13 @@ async function startGame() {
 }
 
 async function postGameResult() {
-  let response = await fetch('gameResult')
-  let responseText = await response.text()
-  console.log(responseText)
+  await fetch(`/gameResult`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({username: username, score: score, accuracy: accuracy})
+  })
 }
 
 function changePosition() {

@@ -25,14 +25,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/gamePrep', gamePrepRoute)
-app.use('/game', gameRoute)
-app.use('/gameResult', gameResultRoute)
-
 app.use((req, res, next) => {
   req.models = models
   next()
 })
+
+app.use('/gamePrep', gamePrepRoute)
+app.use('/game', gameRoute)
+app.use('/gameResult', gameResultRoute)
+
+
 
 
 

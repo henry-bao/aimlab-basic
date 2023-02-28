@@ -31,13 +31,24 @@ async function startGame() {
   let gameHTML = await gameResponse.text()
   body.innerHTML = gameHTML
 
-  // setTimeout(postGameResult, 10000)
 
     let timeleft = 9;
     let downloadTimer = setInterval(function(){
       if(timeleft <= 0){
         clearInterval(downloadTimer);
+        document.getElementById("in-game-button").disabled = true
+        document.getElementById("game-result").innerHTML = `
+          <p>Game Over!</p>
+          <p>Username: ${username}</p>
+          <p>Score: ${score}</p>
+          <p>Accuracy: ${accuracy}</p>
+          <p>Your score has been saved!!</p>
+          <p>You will be redirected in 2 seconds..</p>
+        `
         postGameResult();
+        setTimeout(() => {
+          document.location.href="/";
+        }, 2000)
       }
     document.getElementById("timer").innerHTML = timeleft + "s";
     timeleft -= 1;

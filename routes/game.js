@@ -6,8 +6,9 @@ router.get('/', (req, res) => {
   res.type('html')
   res.send(`
     <div id="timer">10s</div>
+    <div id="game-result"></div>
     <div id="target">
-    <button onclick="changePosition()">button</button>
+    <button id="in-game-button" onclick="changePosition()">button</button>
     </div>
   `)
 });

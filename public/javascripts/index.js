@@ -40,12 +40,9 @@ async function startGame() {
           <p>Score: ${score}</p>
           <p>Accuracy: ${accuracy}</p>
           <p>Your score has been saved!!</p>
-          <p>You will be redirected in 2 seconds..</p>
+          <button onclick="redirectToMain()">Click here to return to the home page</button>
         `;
             postGameResult();
-            setTimeout(() => {
-                document.location.href = '/';
-            }, 2000);
         }
         document.getElementById('timer').innerHTML = timeleft + 's';
         timeleft -= 1;
@@ -74,4 +71,8 @@ function changePosition() {
     let topRandom = Math.floor(Math.random() * 100);
     target.style.left = leftRandom + '%';
     target.style.top = topRandom + '%';
+}
+
+function redirectToMain() {
+    document.location.href = '/';
 }

@@ -46,7 +46,8 @@ const appSettings = {
         clientSecret: process.env.CLIENT_SECRET,
     },
     authRoutes: {
-        redirect: process.env.NODE_ENV === 'dev' ? 'http://localhost:3000/redirect' : 'https://aimlab.bao.lol/redirect',
+        redirect:
+            process.env.NODE_ENV === 'prod' ? 'https://aimlab.bao.lol/redirect' : 'http://localhost:3000/redirect',
         error: '/error',
         unauthorized: '/unauthorized',
     },

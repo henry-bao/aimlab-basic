@@ -1,5 +1,197 @@
-#target {
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto Mono';
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+body {
+    background-color: #333;
+    height: 100vh;
+    overflow: hidden;
+}
+nav {
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    padding-block: 1rem;
+}
+#login {
+    color: white;
+    font-size: 2.5rem;
+    width: 12rem;
+}
+#info:hover {
+    color: rgb(0, 195, 255);
+}
+.info {
+    align-items: center;
+    background-color: #333;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    gap: 1rem;
+    justify-content: space-evenly;
+    left: 50%;
+    min-height: 350px;
+    padding: 1rem;
     position: absolute;
-    left: 45%;
-    top: 45%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+#ok {
+    background-color: red;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem;
+    height: 3rem;
+    transition: background-color 200ms, scale 200ms;
+    width: 4rem;
+}
+#ok:hover {
+    background-color: rgb(77, 35, 119);
+    scale: 1.05;
+}
+.increase-decrease {
+    background-color: red;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem;
+    height: 2rem;
+    transition: background-color 200ms, scale 200ms;
+    width: 2rem;
+}
+.timer {
+    color: white;
+    display: flex;
+    font-size: 2.5rem;
+    gap: 1rem;
+}
+.time {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    width: 15rem;
+}
+#subtract,
+#add {
+    align-items: center;
+    background-color: #555;
+    border: 2px solid black;
+    cursor: pointer;
+    display: flex;
+    line-height: 1.7rem;
+    padding: 0.3rem 0.5rem;
+    transition: background 200ms;
+}
+#subtract:hover,
+#add:hover {
+    background-color: #777;
+}
+.score {
+    color: white;
+    font-size: 2.5rem;
+    width: 12rem;
+}
+
+.container {
+    background-color: white;
+    height: 100vh;
+}
+
+.target {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 0 0.3rem;
+    position: relative;
+    width: 100px;
+}
+.target-img {
+    height: 100px;
+    width: 100px;
+}
+
+#restart-game {
+    animation: restart 500ms infinite alternate-reverse linear;
+    background-color: orange;
+    border-radius: 5px;
+    bottom: 5vh;
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.6);
+    color: white;
+    cursor: pointer;
+    font-size: 4rem;
+    left: 50%;
+    line-height: 3rem;
+    padding: 0.3rem;
+    position: absolute;
+    transform: translate(-50%);
+    transition: background 200ms ease;
+}
+#restart-game:hover {
+    background-color: rgb(221, 146, 6);
+}
+@keyframes restart {
+    from {
+        scale: 1;
+    }
+    to {
+        scale: 1.07;
+    }
+}
+
+.center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.disable {
+    pointer-events: none;
+}
+.hide {
+    display: none;
+}
+
+/** Media Queries */
+@media only screen and (max-width: 730px) {
+    #info,
+    .timer,
+    .score {
+        font-size: 1.5rem;
+    }
+    .score {
+        width: 8rem;
+    }
+    .info {
+        width: 80%;
+    }
+    .time {
+        width: 8rem;
+    }
+}
+@media only screen and (max-width: 530px) {
+    #info,
+    .timer,
+    .score {
+        font-size: 1.2rem;
+    }
+    .score {
+        width: 6rem;
+    }
+    .info {
+        width: 90%;
+    }
+    .time {
+        width: 6rem;
+    }
 }

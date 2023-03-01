@@ -8,7 +8,7 @@
     },
     "scripts": {
         "start": "export NODE_ENV=prod && node ./bin/www.cjs",
-        "dev": "nodemon npm start"
+        "dev": "nodemon ./bin/www.cjs"
     },
     "dependencies": {
         "cookie-parser": "~1.4.4",

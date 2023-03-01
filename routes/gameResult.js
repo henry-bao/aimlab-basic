@@ -15,5 +15,24 @@ router.post('/', async (req, res) => {
 });
 
 
+router.get('/' , async (req, res) => {
+  // Get resutls from database
+  try {
+    let games = await req.models.Player.find();
+    // console.log(games);
+    // Sort games in descending order by score and then by accuracy
+    games.sort((a, b) => {
+      if (a.score === b.score) {
+        return b.accuracy - a.accuracy;
+      } else {
+        return b.score - a.score;
+      }
+    });
+    res.json(games);
+  } catch (error) {
+    res.status(500).json({ 'status': 'failure', 'error': error.toString() })
+  }
+});
+
 
 export default router;

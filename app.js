@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
+app.use((req, _res, next) => {
     req.models = models;
     next();
 });
@@ -46,7 +46,7 @@ const appSettings = {
         clientSecret: process.env.CLIENT_SECRET,
     },
     authRoutes: {
-        redirect: process.env.NODE_ENV === 'dev' ? 'http://localhost:3000/redirect' : 'https://share.bao.lol/redirect',
+        redirect: process.env.NODE_ENV === 'dev' ? 'http://localhost:3000/redirect' : 'https://aimlab.bao.lol/redirect',
         error: '/error',
         unauthorized: '/unauthorized',
     },
@@ -54,12 +54,7 @@ const appSettings = {
 const msId = new msIdExpress.WebAppAuthClientBuilder(appSettings).build();
 app.use(msId.initialize());
 
-app.get(
-    '/signin',
-    msId.signIn({
-        postLoginRedirect: '/',
-    })
-);
+app.get('/signin', msId.signIn({ postLoginRedirect: '/' }));
 app.get('/signout', msId.signOut({ postLogoutRedirect: '/' }));
 app.get('/error', (_req, res) => res.status(500).send('There was a server error.'));
 app.get('/unauthorized', (_req, res) => res.status(401).send('You are not authorized.'));

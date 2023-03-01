@@ -1,12 +1,7 @@
 #!/usr/bin/env node
 const { config } = require('dotenv');
 config();
-
 const { set, connect } = require('mongoose');
-console.log('trying to connect db');
-set('strictQuery', true);
-connect(process.env.MONGODB_URI);
-console.log('successfully connected to mongodb');
 
 /**
  * Module dependencies.
@@ -34,7 +29,12 @@ var http = require('http');
      * Listen on provided port, on all network interfaces.
      */
 
-    server.listen(port);
+    set('strictQuery', true);
+    console.log('trying to connect db');
+    connect(process.env.MONGODB_URI).then(() => {
+        console.log('successfully connected to mongodb');
+        server.listen(port);
+    });
     server.on('error', onError);
     server.on('listening', onListening);
 

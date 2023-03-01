@@ -75,9 +75,3 @@ function changePosition() {
     target.style.left = leftRandom + '%';
     target.style.top = topRandom + '%';
 }
-
-const info = document.querySelector('#info');
-const infoContainer = document.querySelector('.info');
-info.addEventListener('click', () => {
-    infoContainer.classList.toggle('hide');
-});

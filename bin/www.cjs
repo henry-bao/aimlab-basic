@@ -2,6 +2,12 @@
 const { config } = require('dotenv');
 config();
 
+const { set, connect } = require('mongoose');
+console.log('trying to connect db');
+set('strictQuery', true);
+connect(process.env.MONGODB_URI);
+console.log('successfully connected to mongodb');
+
 /**
  * Module dependencies.
  */

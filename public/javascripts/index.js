@@ -9,7 +9,7 @@ function miss() {
 }
 
 async function promptUsername() {
-    // Get ready to start a game. Go to gamePrep route
+
     let prepDiv = document.getElementById('prep');
 
     let prepResponse = await fetch('gamePrep');
@@ -68,8 +68,8 @@ function changePosition() {
     console.log('miss: ' + missClick);
     console.log(accuracy);
     let target = document.getElementById('target');
-    let leftRandom = Math.floor(Math.random() * 100);
-    let topRandom = Math.floor(Math.random() * 100);
+    let leftRandom = Math.floor(Math.random() * 90);
+    let topRandom = Math.floor(Math.random() * 90);
     target.style.left = leftRandom + '%';
     target.style.top = topRandom + '%';
 }

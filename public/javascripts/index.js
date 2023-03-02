@@ -32,6 +32,7 @@ async function startGame() {
     let timeleft = 9;
     let downloadTimer = setInterval(function () {
         if (timeleft <= 0) {
+            accuracy = parseFloat(accuracy.toFixed(2))
             clearInterval(downloadTimer);
             document.getElementById('in-game-button').disabled = true;
             document.getElementById('game-result').innerHTML = `

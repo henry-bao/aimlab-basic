@@ -76,3 +76,9 @@ function changePosition() {
 function redirectToMain() {
     document.location.href = '/';
 }
+
+async function showLeaderboard() {
+    let response = await fetch("gameResult")
+    let responseJson = await response.json();
+    console.log(responseJson)
+}

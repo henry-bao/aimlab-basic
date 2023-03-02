@@ -41,7 +41,7 @@ async function startGame() {
           <p>Score: ${score}</p>
           <p>Accuracy: ${accuracy}</p>
           <p>Your score has been saved!!</p>
-          <button onclick="redirectToMain()">Click here to return to the home page</button>
+          <button onclick="redirectToMain()">Back to Main Menu</button>
         `;
             postGameResult();
         }
@@ -82,4 +82,19 @@ async function showLeaderboard() {
     let response = await fetch("gameResult")
     let responseJson = await response.json();
     console.log(responseJson)
+    let body = document.getElementById('homePage');
+    body.innerHTML = '';
+    body.innerHTML = `<button onclick="redirectToMain()">Back to Main Menu</button>`
+    body.innerHTML += responseJson.map(player => {
+        let date = new Date(player.game_date)
+        date = date.toDateString()
+        return `
+        <div class="playerRecord">
+            <p>Player: ${player.username}</p>
+            <p>Score: ${player.score}</p>
+            <p>Accuracy: ${player.accuracy}</p>
+            <p>Played On: ${date}</p>
+        </div>
+        `
+    }).join("\n");
 }

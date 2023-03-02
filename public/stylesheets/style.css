@@ -3,3 +3,8 @@
     left: 45%;
     top: 45%;
 }
+
+.playerRecord {
+    background-color: rgb(236, 239, 240);
+    margin-bottom: 10px;
+}

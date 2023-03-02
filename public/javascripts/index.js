@@ -3,6 +3,9 @@ let score = 0;
 let validClick = 0;
 let missClick = 0;
 let accuracy = -1;
+var id = null
+
+const GAME_TIME_LIMIT = 19
 
 function miss() {
     missClick++;
@@ -27,9 +30,10 @@ async function startGame() {
     let gameResponse = await fetch('game');
 
     let gameHTML = await gameResponse.text();
-    body.innerHTML = gameHTML;
+    body.innerHTML = `<div id="timer">${GAME_TIME_LIMIT}s</div>`
+    body.innerHTML += gameHTML;
 
-    let timeleft = 9;
+    let timeleft = GAME_TIME_LIMIT;
     let downloadTimer = setInterval(function () {
         if (timeleft <= 0) {
             accuracy = parseFloat(accuracy.toFixed(2))
@@ -60,24 +64,6 @@ async function postGameResult() {
     });
 }
 
-function changePosition() {
-    score += 10;
-    validClick++;
-    accuracy = validClick / missClick;
-    console.log('hit: ' + validClick);
-    console.log('miss: ' + missClick);
-    console.log(accuracy);
-    let target = document.getElementById('target');
-    let leftRandom = Math.floor(Math.random() * 90);
-    let topRandom = Math.floor(Math.random() * 90);
-    target.style.left = leftRandom + '%';
-    target.style.top = topRandom + '%';
-}
-
-function redirectToMain() {
-    document.location.href = '/';
-}
-
 async function showLeaderboard() {
     let response = await fetch("gameResult")
     let responseJson = await response.json();
@@ -97,4 +83,68 @@ async function showLeaderboard() {
         </div>
         `
     }).join("\n");
+}
+
+function changePosition() {
+
+    score += 10;
+    validClick++;
+    accuracy = validClick / missClick;
+    console.log('hit: ' + validClick);
+    console.log('miss: ' + missClick);
+    console.log(accuracy);
+
+    if (score < 50) {
+        let target = document.getElementById('target');
+        let leftRandom = Math.floor(Math.random() * 90);
+        let topRandom = Math.floor(Math.random() * 90);
+        target.style.left = leftRandom + '%';
+        target.style.top = topRandom + '%';
+    } else {
+
+        buttonMove()
+    }
+}
+
+function buttonMove() {
+
+    let leftToRight = true
+    let topToBottom = true
+    let startLeftPos = Math.floor(Math.random() * 90);
+    let startTopPos = Math.floor(Math.random() * 90);
+    let target = document.getElementById('target');
+    target.style.left = startLeftPos + "%"
+    target.style.top = startTopPos + "%"
+    let endLeftPos = Math.floor(Math.random() * 90);
+    let endTopPos = Math.floor(Math.random() * 90);
+    if (startLeftPos > endLeftPos) {leftToRight = false}
+    if (endTopPos < startTopPos) {topToBottom = false}
+
+    // let id = null
+
+    clearInterval(id)
+    id = setInterval(frame, 40)
+    function frame() {
+
+        if (startLeftPos == endLeftPos && startTopPos == endTopPos) {
+            clearInterval(id);
+        } else if (startLeftPos == endLeftPos) {
+            if (topToBottom) {startTopPos++} else {startTopPos--}
+            target.style.left = startLeftPos + "%"
+            target.style.top = startTopPos + "%"
+        }else if (startTopPos == endTopPos) {
+            if (leftToRight) {startLeftPos++} else {startLeftPos--}
+            target.style.left = startLeftPos + "%"
+            target.style.top = startTopPos + "%"
+        }else {
+            if (leftToRight) {startLeftPos++} else {startLeftPos--}
+            if (topToBottom) {startTopPos++} else {startTopPos--}
+            target.style.left = startLeftPos + "%"
+            target.style.top = startTopPos + "%"
+        }
+    }
+}
+
+function redirectToMain() {
+    document.location.href = '/';
 }

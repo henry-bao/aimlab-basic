@@ -12,6 +12,7 @@ import models from './models.js';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { apiRouter } from './routes/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -60,8 +61,6 @@ app.get('/signout', msId.signOut({ postLogoutRedirect: '/' }));
 app.get('/error', (_req, res) => res.status(500).send('There was a server error.'));
 app.get('/unauthorized', (_req, res) => res.status(401).send('You are not authorized.'));
 
-app.use('/gamePrep', gamePrepRoute);
-app.use('/game', gameRoute);
-app.use('/gameResult', gameResultRoute);
+app.use('/api', apiRouter);
 
 export default app;

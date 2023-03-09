@@ -41,8 +41,11 @@ userRouter.get('/leaderboard', async (req, res) => {
     return res.json(user);
 });
 
-userRouter.post('/save-user-info', async (req, res) => {});
+userRouter.get(`/get-history`, async (req, res) => {
+    let history = await req.models.Player.find({ username: req.session.account.username });
 
-userRouter.get('/load-user-info', async (req, res) => {});
+    res.json(history);
+});
+
 
 export { userRouter };

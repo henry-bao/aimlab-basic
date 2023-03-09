@@ -3,9 +3,6 @@
     "version": "1.0.0",
     "private": true,
     "type": "module",
-    "engines": {
-        "node": "~14"
-    },
     "scripts": {
         "start": "export NODE_ENV=prod && node ./bin/www.cjs",
         "dev": "nodemon ./bin/www.cjs"

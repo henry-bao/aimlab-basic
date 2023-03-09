@@ -1,7 +1,7 @@
 let user = undefined;
 
 async function loadIdentity() {
-    let identityEle = document.getElementById('identity-div');
+    const identityEle = document.querySelector('#identity-div');
     try {
         const identityInfo = await fetchJSON(`api/user/get-identity`);
         if (identityInfo.status == 'loggedin') {
@@ -21,4 +21,3 @@ async function loadIdentity() {
         <a id="identity" onclick="loadIdentity()>Retry</a>`;
     }
 }
-

@@ -18,7 +18,7 @@ async function loadLeaderboard() {
                 (user, index) => `
         <tr>
             <th scope="row">${index + 1}</th>
-            <td>${user._id}</td>
+            <td><a href="userInfo.html?user=${user._id}">${user._id}</a></td>
             <td>${user.maxScore}</td>
         </tr>
         `

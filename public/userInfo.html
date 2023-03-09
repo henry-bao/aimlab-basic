@@ -1,26 +1,38 @@
 <html>
+    <head>
+        <title>User Profile</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="stylesheets/style.css" />
+    </head>
 
-<head>
-  <title>AimLabBasic</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide" />
-  <link rel="stylesheet" href="stylesheets/style.css" />
-  <script src="javascripts/util.js"></script>
-  <script src="javascripts/init.js"></script>
-  <script src="javascripts/index.js"></script>
-  <script src="javascripts/identity.js"></script>
-</head>
-
-<body onload="init()">
-  <nav class="navbar navbar-light bg-light">
-    <div id="errorInfo" class="alert alert-danger fade show" role="alert" style="opacity:0"></div>
-    <div><a href="/">Return to Homepage</a></div>
-    <div id="identity-div">loading...</div>
-  </nav>
-
-  <h1>Game History: </h1>
-  <div id="game_history">
-  </div>
-  <button onclick="getHistory()">Show Game History</button>
-</body>
-
+    <body onload="loadUserInfo()">
+        <nav id="user-info-nav"></nav>
+        <div id="user-container">
+            <h1 id="history-title">Game History:</h1>
+            <div id="history"></div>
+        </div>
+        <script src="javascripts/util.js"></script>
+        <script src="javascripts/userinfo.js" defer></script>
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+    </body>
 </html>

@@ -5,9 +5,6 @@
     padding: 0;
     user-select: none;
 }
-h1 {
-    color: white;
-}
 body {
     background-color: #333;
     height: 100vh;
@@ -20,9 +17,24 @@ nav {
     justify-content: space-around;
     padding-block: 1rem;
 }
+
+#history-title {
+    color: black;
+    font-size: 3rem;
+}
+
+#user-container {
+    background-color: white;
+    height: 100vh;
+    padding-left: 10rem;
+    padding-right: 10rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
 #login,
-#logout {
-    color: white;
+#logout,
+#back {
     font-size: 2rem;
     width: 12rem;
     text-decoration: none;
@@ -31,6 +43,14 @@ nav {
     border-radius: 10px;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    text-align: center;
+}
+#login,
+#back {
+    color: white;
+}
+#logout {
+    color: red;
 }
 #identity {
     color: white;
@@ -38,17 +58,32 @@ nav {
     width: 12rem;
     text-decoration: underline;
 }
+#user-identity {
+    color: white;
+    font-size: 2rem;
+    width: 12rem;
+    text-decoration: none;
+}
+
 #logout:link,
 #logout:visited {
     color: red;
     text-decoration: none;
 }
+.table-responsive {
+    max-height: 80vh;
+}
 #login:link,
-#login:visited {
+#login:visited,
+#back:link,
+#back:visited {
     color: white;
     text-decoration: none;
 }
-#login:hover {
+
+#identity:hover,
+#login:hover,
+#back:hover {
     color: rgb(0, 195, 255);
     cursor: pointer;
 }
@@ -56,6 +91,7 @@ nav {
     color: rgb(255, 131, 131);
     cursor: pointer;
 }
+
 .timer {
     color: white;
     display: flex;
@@ -163,13 +199,8 @@ nav {
     font-size: 1.5rem;
 }
 #history {
-    color: white;
-    border-style: solid;
-    border-width: 1px;
-    border-color: white;
-    border-radius: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    color: black;
+    font-size: 2rem;
 }
 .alert-text {
     font-size: 1.5rem;
@@ -198,7 +229,9 @@ nav {
 /** Media Queries */
 @media only screen and (max-width: 730px) {
     #identity,
+    #user-identity,
     #identity-div,
+    #user-identity-div,
     #login,
     #logout,
     .timer,
@@ -214,7 +247,9 @@ nav {
 }
 @media only screen and (max-width: 530px) {
     #identity,
+    #user-identity,
     #identity-div,
+    #user-identity-div,
     #login,
     #logout,
     .timer,

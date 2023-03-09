@@ -44,7 +44,8 @@ const appSettings = {
         clientSecret: '.mF8Q~5Mkv_SS26OrGKeCYWz2fbvNmiC6B0lxbM-',
     },
     authRoutes: {
-        redirect: 'https://aimlab.bao.lol/redirect',
+        redirect:
+            process.env.NODE_ENV === 'prod' ? 'https://aimlab.bao.lol/redirect' : 'http://localhost:3000/redirect',
         error: '/error',
         unauthorized: '/unauthorized',
     },

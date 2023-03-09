@@ -165,15 +165,3 @@ function redirectToMain() {
     document.location.href = '/';
 }
 
-function calculateAccuracyScore(image, clickX, clickY) {
-    const centerX = image.offsetLeft + image.offsetWidth / 2;
-    const centerY = image.offsetTop + image.offsetHeight / 2;
-
-    const distance = Math.sqrt(Math.pow(centerX - clickX, 2) + Math.pow(centerY - clickY, 2));
-    const maxDistance = Math.sqrt(Math.pow(image.offsetWidth, 2) + Math.pow(image.offsetHeight, 2)) / 2;
-
-    let accuracy = Math.round((1 - distance / maxDistance) * 100);
-    accuracy = Math.max(0, Math.min(accuracy, 100));
-
-    return accuracy;
-}

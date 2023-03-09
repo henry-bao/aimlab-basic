@@ -107,11 +107,23 @@ nav {
     width: 100px;
 }
 
+#start-game {
+    align-items: center;
+    background-color: rgb(35, 175, 35);
+    border: 2px solid rgb(35, 175, 35);
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-size: 2rem;
+    padding: 0.3rem 0.5rem;
+    bottom: 10vh;
+    position: absolute;
+}
 #restart-game {
     animation: restart 500ms infinite alternate-reverse linear;
     background-color: orange;
     border-radius: 5px;
-    bottom: 5vh;
+    bottom: 10vh;
     box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.6);
     color: white;
     cursor: pointer;

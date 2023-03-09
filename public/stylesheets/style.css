@@ -128,7 +128,7 @@ nav {
 .score {
     color: white;
     font-size: 2.5rem;
-    width: 18rem;
+    width: 17rem;
 }
 
 #game-container {
@@ -155,16 +155,6 @@ nav {
     flex-direction: column;
     gap: 15px;
     bottom: 15vh;
-}
-#log-out {
-    display: none;
-    background-color: red;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-    font-size: 2rem;
-    padding: 0.3rem 0.5rem;
-    text-align: center;
 }
 #start-game {
     align-items: center;

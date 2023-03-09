@@ -54,7 +54,7 @@ async function loadUserInfo() {
             `;
         }
     } catch (error) {
-        console.log(error);
+        console.error(error);
         userIdentityEle.innerHTML = `<a id="user-identity">User not found</a>`;
     }
 

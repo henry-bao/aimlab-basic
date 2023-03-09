@@ -159,6 +159,15 @@ nav {
 #restart-game:hover {
     background-color: rgb(221, 146, 6);
 }
+#history {
+    color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 @keyframes restart {
     from {
         scale: 1;

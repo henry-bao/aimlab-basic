@@ -3,16 +3,15 @@ let score = 0;
 let validClick = 0;
 let missClick = 0;
 let accuracy = -1;
-var id = null
+var id = null;
 
-const GAME_TIME_LIMIT = 19
+const GAME_TIME_LIMIT = 19;
 
 function miss() {
     missClick++;
 }
 
 async function promptUsername() {
-
     let prepDiv = document.getElementById('prep');
 
     let prepResponse = await fetch('gamePrep');
@@ -30,13 +29,13 @@ async function startGame() {
     let gameResponse = await fetch('game');
 
     let gameHTML = await gameResponse.text();
-    body.innerHTML = `<div id="timer">${GAME_TIME_LIMIT}s</div>`
+    body.innerHTML = `<div id="timer">${GAME_TIME_LIMIT}s</div>`;
     body.innerHTML += gameHTML;
 
     let timeleft = GAME_TIME_LIMIT;
     let downloadTimer = setInterval(function () {
         if (timeleft <= 0) {
-            accuracy = parseFloat(accuracy.toFixed(2))
+            accuracy = parseFloat(accuracy.toFixed(2));
             clearInterval(downloadTimer);
             document.getElementById('in-game-button').disabled = true;
             document.getElementById('game-result').innerHTML = `
@@ -65,28 +64,28 @@ async function postGameResult() {
 }
 
 async function showLeaderboard() {
-    let response = await fetch("gameResult")
+    let response = await fetch('gameResult');
     let responseJson = await response.json();
-    console.log(responseJson)
     let body = document.getElementById('homePage');
     body.innerHTML = '';
-    body.innerHTML = `<button onclick="redirectToMain()">Back to Main Menu</button>`
-    body.innerHTML += responseJson.map(player => {
-        let date = new Date(player.game_date)
-        date = date.toDateString()
-        return `
+    body.innerHTML = `<button onclick="redirectToMain()">Back to Main Menu</button>`;
+    body.innerHTML += responseJson
+        .map((player) => {
+            let date = new Date(player.game_date);
+            date = date.toDateString();
+            return `
         <div class="playerRecord">
             <p>Player: ${player.username}</p>
             <p>Score: ${player.score}</p>
             <p>Accuracy: ${player.accuracy}</p>
             <p>Played On: ${date}</p>
         </div>
-        `
-    }).join("\n");
+        `;
+        })
+        .join('\n');
 }
 
 function changePosition() {
-
     score += 10;
     validClick++;
     accuracy = validClick / missClick;
@@ -101,46 +100,63 @@ function changePosition() {
         target.style.left = leftRandom + '%';
         target.style.top = topRandom + '%';
     } else {
-
-        buttonMove()
+        buttonMove();
     }
 }
 
 function buttonMove() {
-
-    let leftToRight = true
-    let topToBottom = true
+    let leftToRight = true;
+    let topToBottom = true;
     let startLeftPos = Math.floor(Math.random() * 90);
     let startTopPos = Math.floor(Math.random() * 90);
     let target = document.getElementById('target');
-    target.style.left = startLeftPos + "%"
-    target.style.top = startTopPos + "%"
+    target.style.left = startLeftPos + '%';
+    target.style.top = startTopPos + '%';
     let endLeftPos = Math.floor(Math.random() * 90);
     let endTopPos = Math.floor(Math.random() * 90);
-    if (startLeftPos > endLeftPos) {leftToRight = false}
-    if (endTopPos < startTopPos) {topToBottom = false}
+    if (startLeftPos > endLeftPos) {
+        leftToRight = false;
+    }
+    if (endTopPos < startTopPos) {
+        topToBottom = false;
+    }
 
     // let id = null
 
-    clearInterval(id)
-    id = setInterval(frame, 40)
+    clearInterval(id);
+    id = setInterval(frame, 40);
     function frame() {
-
         if (startLeftPos == endLeftPos && startTopPos == endTopPos) {
             clearInterval(id);
         } else if (startLeftPos == endLeftPos) {
-            if (topToBottom) {startTopPos++} else {startTopPos--}
-            target.style.left = startLeftPos + "%"
-            target.style.top = startTopPos + "%"
-        }else if (startTopPos == endTopPos) {
-            if (leftToRight) {startLeftPos++} else {startLeftPos--}
-            target.style.left = startLeftPos + "%"
-            target.style.top = startTopPos + "%"
-        }else {
-            if (leftToRight) {startLeftPos++} else {startLeftPos--}
-            if (topToBottom) {startTopPos++} else {startTopPos--}
-            target.style.left = startLeftPos + "%"
-            target.style.top = startTopPos + "%"
+            if (topToBottom) {
+                startTopPos++;
+            } else {
+                startTopPos--;
+            }
+            target.style.left = startLeftPos + '%';
+            target.style.top = startTopPos + '%';
+        } else if (startTopPos == endTopPos) {
+            if (leftToRight) {
+                startLeftPos++;
+            } else {
+                startLeftPos--;
+            }
+            target.style.left = startLeftPos + '%';
+            target.style.top = startTopPos + '%';
+        } else {
+            if (leftToRight) {
+                startLeftPos++;
+            } else {
+                startLeftPos--;
+            }
+            if (topToBottom) {
+                startTopPos++;
+            } else {
+                startTopPos--;
+            }
+            target.style.left = startLeftPos + '%';
+            target.style.top = startTopPos + '%';
         }
     }
 }

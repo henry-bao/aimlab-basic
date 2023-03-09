@@ -1,10 +1,10 @@
 import express from 'express';
-const router = express.Router();
+const apiRouter = express.Router();
 
-import { gameRouter } from './controllers/game';
-import { userRouter } from './controllers/user';
+import { gameRouter } from './controllers/game.js';
+import { userRouter } from './controllers/user.js';
 
-router.use('/game', gameRouter);
-router.use('/user', userRouter);
+apiRouter.use('/game', gameRouter);
+apiRouter.use('/user', userRouter);
 
-export { router as apiRouter };
+export { apiRouter };

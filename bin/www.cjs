@@ -6,24 +6,25 @@ const { set, connect } = require('mongoose');
 /**
  * Module dependencies.
  */
-var debug = require('debug')('express-starter:server');
-var http = require('http');
+let debug = require('debug')('express-starter:server');
+let http = require('http');
 
 (async () => {
-    const app = await (await import('../app.js')).default;
+    const app = (await import('../app.js')).default;
 
     /**
      * Get port from environment and store in Express.
      */
 
-    var port = normalizePort(process.env.PORT || '3000');
+    let port = normalizePort(process.env.PORT || '3000');
+    console.log(`starting on port ${port}`);
     app.set('port', port);
 
     /**
      * Create HTTP server.
      */
 
-    var server = http.createServer(app);
+    let server = http.createServer(app);
 
     /**
      * Listen on provided port, on all network interfaces.
@@ -43,7 +44,7 @@ var http = require('http');
      */
 
     function normalizePort(val) {
-        var port = parseInt(val, 10);
+        let port = parseInt(val, 10);
 
         if (isNaN(port)) {
             // named pipe
@@ -67,7 +68,7 @@ var http = require('http');
             throw error;
         }
 
-        var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+        let bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
         // handle specific listen errors with friendly messages
         switch (error.code) {
@@ -89,8 +90,8 @@ var http = require('http');
      */
 
     function onListening() {
-        var addr = server.address();
-        var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+        let addr = server.address();
+        let bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
         debug('Listening on ' + bind);
     }
 })().catch((err) => console.error(err));

@@ -5,9 +5,6 @@ import logger from 'morgan';
 import session from 'express-session';
 import msIdExpress from 'microsoft-identity-express';
 
-import gamePrepRoute from './routes/gamePrep.js';
-import gameRoute from './routes/game.js';
-import gameResultRoute from './routes/gameResult.js';
 import models from './models.js';
 
 import { fileURLToPath } from 'url';
@@ -56,8 +53,8 @@ const appSettings = {
 const msId = new msIdExpress.WebAppAuthClientBuilder(appSettings).build();
 app.use(msId.initialize());
 
-app.get('/signin', msId.signIn({ postLoginRedirect: '/' }));
-app.get('/signout', msId.signOut({ postLogoutRedirect: '/' }));
+app.get('/login', msId.signIn({ postLoginRedirect: '/' }));
+app.get('/logout', msId.signOut({ postLogoutRedirect: '/' }));
 app.get('/error', (_req, res) => res.status(500).send('There was a server error.'));
 app.get('/unauthorized', (_req, res) => res.status(401).send('You are not authorized.'));
 

@@ -1,7 +1,7 @@
 import express from 'express';
-const router = express.Router();
+const gameRouter = express.Router();
 
-router.get('/', async (req, res) => {
+gameRouter.get('/', async (req, res) => {
     res.type('html');
     res.send(`
 
@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   `);
 });
 
-router.get('/prep', async (req, res) => {
+gameRouter.get('/prep', async (req, res) => {
     res.type('html');
     res.send(`
     <p>Enter your username: </p>
@@ -21,7 +21,7 @@ router.get('/prep', async (req, res) => {
   `);
 });
 
-router.get('/result', async (req, res) => {
+gameRouter.get('/result', async (req, res) => {
     // Get resutls from database
     try {
         let games = await req.models.Player.find();
@@ -40,7 +40,7 @@ router.get('/result', async (req, res) => {
     }
 });
 
-router.post('/result', async (req, res) => {
+gameRouter.post('/result', async (req, res) => {
     console.log(req.body);
     const newResult = new req.models.Player({
         username: req.body.username,
@@ -51,4 +51,4 @@ router.post('/result', async (req, res) => {
     await newResult.save();
 });
 
-export { router as gameRouter };
+export { gameRouter };

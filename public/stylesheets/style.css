@@ -17,13 +17,40 @@ nav {
     justify-content: space-around;
     padding-block: 1rem;
 }
-#login {
+#login,
+#logout {
     color: white;
-    font-size: 2.5rem;
+    font-size: 2rem;
     width: 12rem;
+    text-decoration: none;
+    background-color: #555;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+.identity {
+    color: white;
+    font-size: 2rem;
+    width: 12rem;
+    text-decoration: underline;
+}
+#logout:link,
+#logout:visited {
+    color: red;
+    text-decoration: none;
+}
+#login:link,
+#login:visited {
+    color: white;
+    text-decoration: none;
 }
 #login:hover {
     color: rgb(0, 195, 255);
+    cursor: pointer;
+}
+#logout:hover {
+    color: rgb(255, 131, 131);
     cursor: pointer;
 }
 .timer {

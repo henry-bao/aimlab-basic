@@ -1,10 +1,10 @@
 import express from 'express';
 
-const router = express.Router();
+const userRouter = express.Router();
 
-router.get('/myIdentity', (req, res) => {
+userRouter.get('/get-identity', (req, res) => {
     if (req.session.isAuthenticated) {
-        res.send({
+        res.json({
             status: 'loggedin',
             userInfo: {
                 name: req.session.account.name,
@@ -12,12 +12,12 @@ router.get('/myIdentity', (req, res) => {
             },
         });
     } else {
-        res.send({ status: 'loggedout' });
+        res.json({ status: 'loggedout' });
     }
 });
 
-router.post('/save-user-info', async (req, res) => {});
+userRouter.post('/save-user-info', async (req, res) => {});
 
-router.get('/load-user-info', async (req, res) => {});
+userRouter.get('/load-user-info', async (req, res) => {});
 
-export { router as userRouter };
+export { userRouter };

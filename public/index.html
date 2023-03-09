@@ -3,12 +3,15 @@
         <title>AimLabBasic</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide" />
         <link rel="stylesheet" href="stylesheets/style.css" />
+        <script src="javascripts/util.js"></script>
+        <script src="javascripts/init.js"></script>
         <script src="javascripts/index.js"></script>
+        <script src="javascripts/identity.js"></script>
     </head>
 
-    <body>
+    <body onload="init()">
         <nav>
-            <span id="login" onclick="">login</span>
+            <div id="identity-div">loading...</div>
             <div class="timer">
                 <span id="subtract">-</span>
                 <div class="time"><span id="seconds"></span> seconds</div>

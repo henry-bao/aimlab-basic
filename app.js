@@ -51,6 +51,7 @@ const appSettings = {
     },
 };
 const msId = new msIdExpress.WebAppAuthClientBuilder(appSettings).build();
+
 app.use(msId.initialize());
 
 app.get('/login', msId.signIn({ postLoginRedirect: '/' }));

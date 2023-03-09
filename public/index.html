@@ -7,6 +7,7 @@
         <script src="javascripts/init.js"></script>
         <script src="javascripts/index.js"></script>
         <script src="javascripts/identity.js"></script>
+        <script src="javascripts/game.js" defer></script>
     </head>
 
     <body onload="init()">
@@ -19,11 +20,14 @@
             </div>
             <div class="score">Score: <span id="score"></span></div>
         </nav>
-        <div class="container center">
-            <div class="target">
+        <div id="game-container" class="center">
+            <div class="target disable">
                 <img class="target-img" src="images/target.png" />
             </div>
-            <div id="start-game">Start Game!</div>
+            <div id="button-container">
+                <div id="start-game" onclick="startGame()">Start Game!</div>
+                <div id="leaderboard">Leaderboard</div>
+            </div>
             <div id="restart-game" class="hide">&#8634;</div>
         </div>
     </body>

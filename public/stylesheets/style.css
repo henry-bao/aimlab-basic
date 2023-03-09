@@ -88,7 +88,7 @@ nav {
     width: 12rem;
 }
 
-.container {
+#game-container {
     background-color: white;
     height: 100vh;
 }
@@ -106,18 +106,32 @@ nav {
     height: 100px;
     width: 100px;
 }
-
+#button-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    bottom: 15vh;
+}
 #start-game {
     align-items: center;
     background-color: rgb(35, 175, 35);
-    border: 2px solid rgb(35, 175, 35);
     border-radius: 10px;
     color: white;
     cursor: pointer;
     font-size: 2rem;
     padding: 0.3rem 0.5rem;
-    bottom: 10vh;
-    position: absolute;
+    text-align: center;
+}
+#leaderboard {
+    align-items: center;
+    background-color: rgb(216, 146, 17);
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-size: 2rem;
+    padding: 0.3rem 0.5rem;
+    text-align: center;
 }
 #restart-game {
     animation: restart 500ms infinite alternate-reverse linear;
@@ -172,9 +186,6 @@ nav {
     .score {
         width: 8rem;
     }
-    .info {
-        width: 80%;
-    }
     .time {
         width: 8rem;
     }
@@ -190,9 +201,6 @@ nav {
     }
     .score {
         width: 6rem;
-    }
-    .info {
-        width: 90%;
     }
     .time {
         width: 6rem;

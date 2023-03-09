@@ -2,11 +2,18 @@ import mongoose from 'mongoose';
 
 let models = {};
 
-const playerSchema = new mongoose.Schema({
-    username: String,
-    score: Number,
+const gameSchema = new mongoose.Schema({
+    round: Number,
+    hit: Number,
+    seconds: Number,
     accuracy: Number,
     game_date: Date,
+});
+
+const playerSchema = new mongoose.Schema({
+    username: String,
+    user: String,
+    games: [gameSchema],
 });
 
 models.Player = mongoose.model('Player', playerSchema);

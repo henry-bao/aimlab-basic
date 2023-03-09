@@ -85,10 +85,14 @@ nav {
 #add:hover {
     background-color: #777;
 }
+
+#score {
+    font-size: 1.5rem;
+}
 .score {
     color: white;
     font-size: 2.5rem;
-    width: 15rem;
+    width: 18rem;
 }
 
 #game-container {

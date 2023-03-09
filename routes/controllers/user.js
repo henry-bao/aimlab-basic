@@ -2,8 +2,16 @@ import express from 'express';
 
 const userRouter = express.Router();
 
-userRouter.get('/get-identity', (req, res) => {
+userRouter.get('/get-identity', async (req, res) => {
     if (req.session.isAuthenticated) {
+        const user = await req.models.Player.findOne({ username: req.session.account.username });
+        if (!user) {
+            await req.models.Player.create({
+                username: req.session.account.username,
+                user: req.session.account.name,
+                games: [],
+            });
+        }
         res.json({
             status: 'loggedin',
             userInfo: {
@@ -18,7 +26,6 @@ userRouter.get('/get-identity', (req, res) => {
 
 userRouter.post('/save-user-info', async (req, res) => {});
 
-userRouter.get('/load-user-info', async (req, res) => {
-});
+userRouter.get('/load-user-info', async (req, res) => {});
 
 export { userRouter };

@@ -41,20 +41,18 @@ gameRouter.get('/result', async (req, res) => {
 });
 
 gameRouter.post('/result', async (req, res) => {
-    console.log(req.body);
-    const newResult = new req.models.Player({
-        username: req.body.username,
-        score: req.body.score,
-        accuracy: req.body.accuracy,
-        game_date: Date.now(),
-    });
-    await newResult.save();
+    const gameResult = req.body;
+    await req.models.Player.findOneAndUpdate(
+        { username: req.session.account.username },
+        { $push: { games: gameResult } },
+        { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
 });
 
 gameRouter.get(`/get-history`, async (req, res) => {
-    let history = await req.models.Player.find({username: req.session.username})
+    let history = await req.models.Player.find({ username: req.session.account.username });
 
-    res.json(history)
-})
+    res.json(history);
+});
 
 export { gameRouter };

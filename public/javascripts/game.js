@@ -13,32 +13,35 @@ const restartGameEl = document.querySelector('#restart-game');
 const target = document.querySelector('.target');
 
 const gameState = {
-    score: 0,
-    seconds: 10,
+    round: 0,
+    hit: 0,
+    seconds: 20,
+    totalAccuracy: 0,
     avgAccuracy: null,
-    totalAccuracy: null,
     ended: false,
-    top: Math.random() * 75,
-    left: Math.random() * 90,
     moveInterval: null,
 };
 
 secondsEl.textContent = ' ' + gameState.seconds;
-scoreEl.textContent = gameState.score;
+scoreEl.textContent = `${gameState.hit} / ${gameState.round}`;
 
-addEl.addEventListener('mousedown', () => {
+addEl.addEventListener('click', () => {
     gameState.seconds++;
     secondsEl.textContent = ' ' + gameState.seconds;
 });
 
-subtractEl.addEventListener('mousedown', () => {
+subtractEl.addEventListener('click', () => {
     if (gameState.seconds > 3) gameState.seconds--;
     secondsEl.textContent = ' ' + gameState.seconds;
 });
 
 async function startGame() {
     if (user?.status !== 'loggedin') {
-        alert('Please log in to play the game!');
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please log in to play the game!',
+        });
         return;
     }
     for (const div of buttons) {
@@ -47,26 +50,23 @@ async function startGame() {
     target.classList.remove('disable');
     gameContainer.classList.remove('center');
 
-    target.style.top = `${gameState.top}%`;
-    target.style.left = `${gameState.left}%`;
+    movement();
+    timer();
     let firstClick = true;
     target.addEventListener('click', (event) => {
         if (gameState.ended) return;
         if (firstClick) {
-            timer();
             addEl.classList.add('disable');
             subtractEl.classList.add('disable');
             firstClick = false;
         }
-        clearInterval(gameState.moveInterval);
+        if (gameState.moveInterval) {
+            clearInterval(gameState.moveInterval);
+        }
+        incrementScore();
         movement();
         const accuracy = calculateAccuracyScore(target, event.clientX, event.clientY);
-        if (gameState.avgAccuracy === null) {
-            gameState.avgAccuracy = accuracy;
-        } else {
-            gameState.avgAccuracy = (gameState.totalAccuracy + accuracy) / gameState.score;
-        }
-        incrementScore(accuracy);
+        incrementAccuracy(accuracy);
     });
 }
 
@@ -77,24 +77,57 @@ function restartGame() {
 function timer() {
     subtractEl.classList.add('disable');
     addEl.classList.add('disable');
-    setInterval(() => {
+    const totalTime = gameState.seconds;
+    setInterval(async () => {
         if (gameState.seconds === 0) return;
         gameState.seconds--;
         secondsEl.textContent = ' ' + gameState.seconds;
         if (gameState.seconds === 0) {
             gameState.ended = true;
+            clearInterval(gameState.moveInterval);
             target.classList.add('disable');
             subtractEl.classList.add('disable');
             addEl.classList.add('disable');
             restartGameEl.classList.remove('hide');
+            Swal.fire({
+                icon: 'success',
+                title: 'Game Over!',
+                text: ``,
+                allowOutsideClick: false,
+                html: `<p><strong>Score: </strong> <span>${gameState.hit} / ${gameState.round}</span></p>
+                <p><strong>Accuracy: </strong> <span>${gameState.avgAccuracy.toFixed(2)}%</span></p>
+                <p><strong>Time: </strong> <span>${totalTime} seconds</span></p>`,
+            });
+            await fetchJSON('api/game/result', {
+                method: 'POST',
+                body: {
+                    hit: gameState.hit,
+                    round: gameState.round,
+                    seconds: totalTime,
+                    accuracy: gameState.avgAccuracy.toFixed(2),
+                    game_date: new Date(),
+                },
+            });
         }
     }, 1000);
 }
 
-function incrementScore(accuracy) {
-    gameState.score++;
+function incrementScore() {
+    gameState.hit++;
+    refreshScore();
+}
+
+function refreshScore() {
+    scoreEl.textContent = `${gameState.hit} / ${gameState.round}`;
+}
+
+function incrementAccuracy(accuracy) {
     gameState.totalAccuracy += accuracy;
-    scoreEl.textContent = gameState.score;
+    if (gameState.avgAccuracy === null) {
+        gameState.avgAccuracy = accuracy;
+    } else {
+        gameState.avgAccuracy = (gameState.totalAccuracy + accuracy) / gameState.round;
+    }
 }
 
 function calculateAccuracyScore(image, clickX, clickY) {
@@ -111,13 +144,18 @@ function calculateAccuracyScore(image, clickX, clickY) {
 }
 
 function movement() {
-    const randomTop = Math.random() * 75;
-    const randomLeft = Math.random() * 90;
+    gameState.round++;
 
-    const distanceX = randomLeft - gameState.left;
-    const distanceY = randomTop - gameState.top;
+    const randomStartTop = Math.random() * 75;
+    const randomStartLeft = Math.random() * 90;
 
-    const steps = 30; // number of steps for the animation
+    const randomEndTop2 = Math.random() * 75;
+    const randomEndLeft2 = Math.random() * 90;
+
+    const distanceX = randomEndLeft2 - randomStartLeft;
+    const distanceY = randomEndTop2 - randomStartTop;
+
+    const steps = 150; // number of steps for the animation
     const duration = 10; // duration of each step in milliseconds
 
     let stepCount = 0;
@@ -125,16 +163,16 @@ function movement() {
     const stepY = distanceY / steps;
 
     const interval = setInterval(() => {
-        gameState.left += stepX;
-        gameState.top += stepY;
-
-        target.style.top = `${gameState.top}%`;
-        target.style.left = `${gameState.left}%`;
-
-        stepCount++;
-        if (stepCount === steps && interval === gameState.moveInterval) {
+        if (stepCount === steps) {
             clearInterval(interval);
+            incrementAccuracy(0);
+            refreshScore();
+            movement();
+            return;
         }
+        stepCount++;
+        target.style.top = `${randomStartTop + stepCount * stepY}%`;
+        target.style.left = `${randomStartLeft + stepCount * stepX}%`;
     }, duration);
 
     gameState.moveInterval = interval;

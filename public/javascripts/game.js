@@ -37,7 +37,11 @@ subtractEl.addEventListener('click', () => {
 
 async function startGame() {
     if (user?.status !== 'loggedin') {
-        alert('Please log in to play the game!');
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please log in to play the game!',
+        });
         return;
     }
     for (const div of buttons) {
@@ -73,6 +77,7 @@ function restartGame() {
 function timer() {
     subtractEl.classList.add('disable');
     addEl.classList.add('disable');
+    const totalTime = gameState.seconds;
     setInterval(async () => {
         if (gameState.seconds === 0) return;
         gameState.seconds--;
@@ -84,12 +89,21 @@ function timer() {
             subtractEl.classList.add('disable');
             addEl.classList.add('disable');
             restartGameEl.classList.remove('hide');
+            Swal.fire({
+                icon: 'success',
+                title: 'Game Over!',
+                text: ``,
+                allowOutsideClick: false,
+                html: `<p><strong>Score: </strong> <span>${gameState.hit} / ${gameState.round}</span></p>
+                <p><strong>Accuracy: </strong> <span>${gameState.avgAccuracy.toFixed(2)}%</span></p>
+                <p><strong>Time: </strong> <span>${totalTime} seconds</span></p>`,
+            });
             await fetchJSON('api/game/result', {
                 method: 'POST',
                 body: {
                     hit: gameState.hit,
                     round: gameState.round,
-                    seconds: gameState.seconds,
+                    seconds: totalTime,
                     accuracy: gameState.avgAccuracy.toFixed(2),
                     game_date: new Date(),
                 },

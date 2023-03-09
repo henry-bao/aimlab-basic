@@ -167,16 +167,16 @@ function redirectToMain() {
 
 async function getHistory() {
     let history = await fetchJSON(`api/game/get-history`);
-    console.log(history)
+    console.log(history[0].games)
     let gameHistoryDiv = document.getElementById('game_history');
     gameHistoryDiv.innerHTML = '';
-    gameHistoryDiv.innerHTML += history.map(player => {
+    gameHistoryDiv.innerHTML += history[0].games.map(player => {
         let date = new Date(player.game_date)
         date = date.toDateString()
         return `
-        <div>
-            <p>Player: ${player.username}</p>
-            <p>Score: ${player.score}</p>
+        <div id="history">
+            <p>Player: ${history[0].user}</p>
+            <p>Score: ${player.hit}</p>
             <p>Accuracy: ${player.accuracy}</p>
             <p>Played On: ${date}</p>
         </div>

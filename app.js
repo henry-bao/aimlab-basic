@@ -30,7 +30,7 @@ app.use((req, _res, next) => {
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(
     session({
-        secret: process.env.SESSION_SECRET,
+        secret: '0tkaDAE4qceMretpQJhVrMDuExeFkAYjMwfkG4A1po8',
         saveUninitialized: true,
         cookie: { maxAge: oneDay },
         resave: false,
@@ -39,15 +39,12 @@ app.use(
 
 const appSettings = {
     appCredentials: {
-        clientId: process.env.CLIENT_ID,
-        tenantId: process.env.TENANT_ID,
-        clientSecret: process.env.CLIENT_SECRET,
+        clientId: '3aed049a-dcfc-444f-9704-ed029702835a',
+        tenantId: 'f6b6dd5b-f02f-441a-99a0-162ac5060bd2',
+        clientSecret: '.mF8Q~5Mkv_SS26OrGKeCYWz2fbvNmiC6B0lxbM-',
     },
     authRoutes: {
-        redirect:
-            process.env.NODE_ENV === 'prod'
-                ? 'https://aimlab-basic.bao.lol/redirect'
-                : 'http://localhost:3000/redirect',
+        redirect: 'https://aimlab.bao.lol/redirect',
         error: '/error',
         unauthorized: '/unauthorized',
     },

@@ -1,26 +1,6 @@
 import express from 'express';
 const gameRouter = express.Router();
 
-gameRouter.get('/', async (req, res) => {
-    res.type('html');
-    res.send(`
-
-    <div id="game-result"></div>
-    <div id="target">
-    <button id="in-game-button" onclick="changePosition()">button</button>
-    </div>
-  `);
-});
-
-gameRouter.get('/prep', async (req, res) => {
-    res.type('html');
-    res.send(`
-    <p>Enter your username: </p>
-    <input type="text" id="username"></input>
-    <button onclick="startGame()">Done</button>
-  `);
-});
-
 gameRouter.get('/result', async (req, res) => {
     // Get resutls from database
     try {
@@ -47,12 +27,6 @@ gameRouter.post('/result', async (req, res) => {
         { $push: { games: gameResult } },
         { upsert: true, new: true, setDefaultsOnInsert: true }
     );
-});
-
-gameRouter.get(`/get-history`, async (req, res) => {
-    let history = await req.models.Player.find({ username: req.session.account.username });
-
-    res.json(history);
 });
 
 export { gameRouter };

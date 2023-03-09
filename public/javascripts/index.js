@@ -166,7 +166,7 @@ function redirectToMain() {
 }
 
 async function getHistory() {
-    let history = await fetchJSON(`api/game/get-history`);
+    let history = await fetchJSON(`api/user/get-history`);
     console.log(history[0].games)
     let gameHistoryDiv = document.getElementById('game_history');
     gameHistoryDiv.innerHTML = '';

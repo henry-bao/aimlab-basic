@@ -24,8 +24,28 @@ userRouter.get('/get-identity', async (req, res) => {
     }
 });
 
-userRouter.post('/save-user-info', async (req, res) => {});
+userRouter.get('/leaderboard', async (req, res) => {
+    let user = await req.models.Player.aggregate([
+        { $unwind: '$games' },
+        {
+            $group: {
+                _id: '$username',
+                maxScore: { $max: '$games.hit' },
+            },
+        },
+    ]);
+    if (!user.length) {
+        return res.json([]);
+    }
+    user = user.sort((a, b) => b.maxScore - a.maxScore);
+    return res.json(user);
+});
 
-userRouter.get('/load-user-info', async (req, res) => {});
+userRouter.get(`/get-history`, async (req, res) => {
+    let history = await req.models.Player.find({ username: req.session.account.username });
+
+    res.json(history);
+});
+
 
 export { userRouter };

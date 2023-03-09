@@ -7,7 +7,7 @@ async function loadIdentity() {
         if (identityInfo.status == 'loggedin') {
             myIdentity = identityInfo.userInfo.username;
             identityEle.innerHTML = `
-            <a class="identity" href="/userInfo.html?user=${encodeURIComponent(
+            <a id="identity" href="/userInfo.html?user=${encodeURIComponent(
                 identityInfo.userInfo.username
             )}">${escapeHTML(identityInfo.userInfo.name)}</a>`;
         } else {

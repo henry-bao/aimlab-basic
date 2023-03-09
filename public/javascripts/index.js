@@ -164,3 +164,23 @@ function buttonMove() {
 function redirectToMain() {
     document.location.href = '/';
 }
+
+async function getHistory() {
+    let history = await fetchJSON(`api/game/get-history`);
+    console.log(history)
+    let gameHistoryDiv = document.getElementById('game_history');
+    gameHistoryDiv.innerHTML = '';
+    gameHistoryDiv.innerHTML += history.map(player => {
+        let date = new Date(player.game_date)
+        date = date.toDateString()
+        return `
+        <div>
+            <p>Player: ${player.username}</p>
+            <p>Score: ${player.score}</p>
+            <p>Accuracy: ${player.accuracy}</p>
+            <p>Played On: ${date}</p>
+        </div>
+        `
+    }).join("\n");
+
+}

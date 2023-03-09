@@ -184,7 +184,3 @@ async function getHistory() {
     }).join("\n");
 
 }
-
-async function logOut() {
-    await fetch("logout")
-}

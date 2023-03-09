@@ -20,6 +20,9 @@ nav {
     justify-content: space-around;
     padding-block: 1rem;
 }
+a {
+    color: white;
+}
 #login,
 #logout {
     color: white;

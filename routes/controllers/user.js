@@ -47,8 +47,15 @@ userRouter.get('/leaderboard', async (req, res) => {
 });
 
 userRouter.get(`/get-history`, async (req, res) => {
-    const history = await req.models.Player.findOne({ username: req.query.username });
-    res.json(history.games);
+    try {
+        const history = await req.models.Player.findOne({ username: req.query.username });
+        if (!history) {
+            return res.json([]);
+        }
+        res.json(history.games);
+    } catch (error) {
+        res.json([]);
+    }
 });
 
 userRouter.get('/load-user-info', async (req, res) => {

@@ -126,7 +126,7 @@ function refreshScore() {
 }
 
 function incrementAccuracy(accuracy) {
-    console.log('Accuracy' + accuracy);
+    console.log('Accuracy: ' + accuracy);
     gameState.totalAccuracy += accuracy;
     if (gameState.avgAccuracy === null) {
         gameState.avgAccuracy = accuracy;

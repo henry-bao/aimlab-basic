@@ -6,6 +6,12 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+        environment:
+            - SESSION_SECRET=${SESSION_SECRET}
+            - MONGODB_URI=${MONGODB_URI}
+            - CLIENT_ID=${CLIENT_ID}
+            - CLIENT_SECRET=${CLIENT_SECRET}
+            - TENANT_ID=${TENANT_ID}
         ports:
             - 3000:3000
         restart: always

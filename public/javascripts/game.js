@@ -50,8 +50,9 @@ async function startGame() {
     target.classList.remove('disable');
     gameContainer.classList.remove('center');
 
-    movement();
     timer();
+    movement();
+
     let firstClick = true;
     target.addEventListener('click', (event) => {
         if (gameState.ended) return;
@@ -83,6 +84,7 @@ function timer() {
         gameState.seconds--;
         secondsEl.textContent = ' ' + gameState.seconds;
         if (gameState.seconds === 0) {
+            gameState.round -= 1;
             gameState.ended = true;
             clearInterval(gameState.moveInterval);
             target.classList.add('disable');
@@ -122,6 +124,7 @@ function refreshScore() {
 }
 
 function incrementAccuracy(accuracy) {
+    console.log('Accuracy' + accuracy);
     gameState.totalAccuracy += accuracy;
     if (gameState.avgAccuracy === null) {
         gameState.avgAccuracy = accuracy;

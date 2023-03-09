@@ -164,4 +164,3 @@ function buttonMove() {
 function redirectToMain() {
     document.location.href = '/';
 }
-

@@ -45,7 +45,7 @@ const appSettings = {
     },
     authRoutes: {
         redirect:
-            process.env.NODE_ENV === 'prod' ? 'https://aimlabbasic.bao.lol/redirect' : 'http://localhost:3000/redirect',
+            process.env.NODE_ENV === 'prod' ? 'https://aimlab.bao.lol/redirect' : 'http://localhost:3000/redirect',
         error: '/error',
         unauthorized: '/unauthorized',
     },

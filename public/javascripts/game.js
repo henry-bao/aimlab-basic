@@ -40,7 +40,7 @@ async function startGame() {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Please log in to play the game!',
+            html: `<p class="alert-text">Please log in to play the game!</p>`,
         });
         return;
     }
@@ -96,9 +96,11 @@ function timer() {
                 title: 'Game Over!',
                 text: ``,
                 allowOutsideClick: false,
-                html: `<p><strong>Score: </strong> <span>${gameState.hit} / ${gameState.round}</span></p>
-                <p><strong>Accuracy: </strong> <span>${gameState.avgAccuracy.toFixed(2)}%</span></p>
-                <p><strong>Time: </strong> <span>${totalTime} seconds</span></p>`,
+                html: `<p class="alert-text"><strong>Score: </strong> <span>${gameState.hit} / ${
+                    gameState.round
+                }</span></p>
+                <p class="alert-text"><strong>Accuracy: </strong> <span>${gameState.avgAccuracy.toFixed(2)}%</span></p>
+                <p class="alert-text"><strong>Time: </strong> <span>${totalTime} seconds</span></p>`,
             });
             await fetchJSON('api/game/result', {
                 method: 'POST',

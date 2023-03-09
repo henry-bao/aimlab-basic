@@ -18,6 +18,7 @@ userRouter.get('/get-identity', (req, res) => {
 
 userRouter.post('/save-user-info', async (req, res) => {});
 
-userRouter.get('/load-user-info', async (req, res) => {});
+userRouter.get('/load-user-info', async (req, res) => {
+});
 
 export { userRouter };

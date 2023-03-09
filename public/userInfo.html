@@ -1,0 +1,26 @@
+<html>
+
+<head>
+  <title>AimLabBasic</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide" />
+  <link rel="stylesheet" href="stylesheets/style.css" />
+  <script src="javascripts/util.js"></script>
+  <script src="javascripts/init.js"></script>
+  <script src="javascripts/index.js"></script>
+  <script src="javascripts/identity.js"></script>
+</head>
+
+<body onload="init()">
+  <nav class="navbar navbar-light bg-light">
+    <div id="errorInfo" class="alert alert-danger fade show" role="alert" style="opacity:0"></div>
+    <div><a href="/">Return to Homepage</a></div>
+    <div id="identity-div">loading...</div>
+  </nav>
+
+  <h1>Game History: </h1>
+  <div id="game_history">
+  </div>
+  <button onclick="getHistory()">Show Game History</button>
+</body>
+
+</html>

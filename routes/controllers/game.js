@@ -51,4 +51,10 @@ gameRouter.post('/result', async (req, res) => {
     await newResult.save();
 });
 
+gameRouter.get(`/get-history`, async (req, res) => {
+    let history = await req.models.Player.find({username: req.session.username})
+
+    res.json(history)
+})
+
 export { gameRouter };

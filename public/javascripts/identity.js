@@ -21,3 +21,4 @@ async function loadIdentity() {
         <a id="identity" onclick="loadIdentity()>Retry</a>`;
     }
 }
+

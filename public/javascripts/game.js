@@ -91,27 +91,46 @@ function timer() {
             subtractEl.classList.add('disable');
             addEl.classList.add('disable');
             restartGameEl.classList.remove('hide');
-            Swal.fire({
-                icon: 'success',
-                title: 'Game Over!',
-                text: ``,
-                allowOutsideClick: false,
-                html: `<p class="alert-text"><strong>Score: </strong> <span>${gameState.hit} / ${
-                    gameState.round
-                }</span></p>
-                <p class="alert-text"><strong>Accuracy: </strong> <span>${gameState.avgAccuracy.toFixed(2)}%</span></p>
-                <p class="alert-text"><strong>Time: </strong> <span>${totalTime} seconds</span></p>`,
-            });
-            await fetchJSON('api/game/result', {
-                method: 'POST',
-                body: {
-                    hit: gameState.hit,
-                    round: gameState.round,
-                    seconds: totalTime,
-                    accuracy: gameState.avgAccuracy.toFixed(2),
-                    game_date: new Date(),
-                },
-            });
+
+            try {
+                const postReult = await fetchJSON('api/game/result', {
+                    method: 'POST',
+                    body: {
+                        hit: gameState.hit,
+                        round: gameState.round,
+                        seconds: totalTime,
+                        accuracy: gameState.avgAccuracy.toFixed(2),
+                        game_date: new Date(),
+                    },
+                });
+                if (postReult.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Game Over!',
+                        text: ``,
+                        allowOutsideClick: false,
+                        html: `<p class="alert-text"><strong>Score: </strong> <span>${gameState.hit} / ${
+                            gameState.round
+                        }</span></p>
+                        <p class="alert-text"><strong>Accuracy: </strong> <span>${gameState.avgAccuracy.toFixed(
+                            2
+                        )}%</span></p>
+                        <p class="alert-text"><strong>Time: </strong> <span>${totalTime} seconds</span></p>`,
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        html: `<p class="alert-text">${postReult.message}</p>`,
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    html: `<p class="alert-text">${error.message}</p>`,
+                });
+            }
         }
     }, 1000);
 }

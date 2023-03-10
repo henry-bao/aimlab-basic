@@ -1,4 +1,3 @@
-import e from 'express';
 import express from 'express';
 
 const userRouter = express.Router();
@@ -30,20 +29,51 @@ userRouter.get('/get-identity', async (req, res) => {
 });
 
 userRouter.get('/leaderboard', async (req, res) => {
-    let user = await req.models.Player.aggregate([
-        { $unwind: '$games' },
-        {
-            $group: {
-                _id: '$username',
-                maxScore: { $max: '$games.hit' },
-            },
-        },
-    ]);
-    if (!user.length) {
-        return res.json([]);
+    try {
+        if (req.query?.type === 'accuracy') {
+            const user = await req.models.Player.aggregate([
+                { $unwind: '$games' },
+                {
+                    $group: {
+                        _id: '$username',
+                        data: { $avg: '$games.accuracy' },
+                    },
+                },
+                { $sort: { data: -1 } },
+                { $limit: 10 },
+            ]);
+            if (!user.length) {
+                return res.json([]);
+            }
+            user.forEach((user) => {
+                user.data = `${user.data.toFixed(2)}%`;
+            });
+            return res.json(user);
+        } else if (req.query?.type === 'games') {
+            const user = await req.models.Player.aggregate([
+                // max 10 players
+                { $unwind: '$games' },
+                {
+                    $group: {
+                        _id: '$username',
+                        data: { $sum: 1 },
+                    },
+                },
+                { $sort: { data: -1 } },
+                { $limit: 10 },
+            ]);
+            if (!user.length) {
+                return res.json([]);
+            }
+            return res.json(user);
+        } else {
+            return res.json([]);
+        }
+    } catch (error) {
+        if (!user.length) {
+            return res.json([]);
+        }
     }
-    user = user.sort((a, b) => b.maxScore - a.maxScore);
-    return res.json(user);
 });
 
 userRouter.get(`/get-history`, async (req, res) => {

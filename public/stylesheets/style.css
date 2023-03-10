@@ -20,11 +20,23 @@ nav {
 .modal-close {
     font-size: 2.5rem;
 }
+#modal-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+}
+#modal-refresh-button,
+#modal-check-button,
+#leaderboard-body {
+    font-size: 1.5rem;
+}
 #history-title {
     color: black;
     font-size: 3rem;
 }
-
 #user-container {
     background-color: white;
     height: 100vh;
@@ -105,7 +117,7 @@ nav {
     display: flex;
     gap: 1rem;
     justify-content: center;
-    width: 15rem;
+    width: 18rem;
 }
 #subtract,
 #add {
@@ -130,7 +142,7 @@ nav {
 .score {
     color: white;
     font-size: 2.5rem;
-    width: 17rem;
+    width: 10rem;
 }
 
 #game-container {

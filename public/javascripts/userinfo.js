@@ -2,6 +2,7 @@ async function loadUserInfo() {
     const urlParams = new URLSearchParams(window.location.search);
     const username = urlParams.get('user');
     const userInfoNav = document.querySelector('#user-info-nav');
+    const gameNum = document.querySelector('#game-num');
 
     const identityInfo = await fetchJSON(`api/user/get-identity`);
 
@@ -25,8 +26,10 @@ async function loadUserInfo() {
         const historyDiv = document.querySelector('#history');
         if (!history.length) {
             historyDiv.innerHTML = `No history found`;
+            gameNum.textContent = `0 games`;
         } else {
             historyDiv.classList.add('table-responsive');
+            gameNum.textContent = `${history.length} games`;
             historyDiv.innerHTML = `
             <table class="table">
                 <thead>

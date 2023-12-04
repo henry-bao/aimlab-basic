@@ -4,11 +4,11 @@ Henry Bao, Lesi Li, Russell Sean Eng, Christopher Ku
 
 ## Project Description
 
-Our application AimLabsBasic targets a wide range of audiences including gamers who want to try and learn how to play shooting games, people who want to release their stress by playing a simple game, and other users that simply want to improve their mouse agility and accuracy.
+Our application, AimLabsBasic, is designed for a diverse audience, including gamers seeking to learn and practice shooting games, individuals looking for a simple stress-relief game, and those aiming to enhance their mouse agility and accuracy.
 
-The project is a similar and simpler version of Aim Labs that runs on a web browser instead of a stand-alone application that has to be installed onto the user’s computer, therefore extending the accessibility of the game. The application allows users to check their mouse accuracy and compare it to their past performance to know whether they have improved or not. The reason for users to choose this application is that our application is simple to use, not competitive, and will not create a stressful atmosphere. So users can practice and find familiarity through our application.
+Unlike Aim Labs, AimLabsBasic is a more straightforward version that operates in a web browser, eliminating the need for installation on a computer. This approach makes the game more accessible. Users can track their mouse accuracy and compare it with their previous performances to gauge improvement. Our application stands out for its simplicity, non-competitive nature, and stress-free environment, allowing users to practice comfortably and familiarize themselves with the game.
 
-As developers, we know the importance of aiming skills in shooter games and understand that there is a market for an aim training game. Our team has a passion for gaming and software development, and we believe our game will benefit a variety of users. We want to provide gamers with an easy and effective way to improve their skills in aiming and have a platform to store their progress along the way.
+As developers with a keen interest in gaming and software development, we recognize the significance of aiming skills in shooter games and the demand for an aim training game. Our goal is to offer an accessible and efficient method for gamers to enhance their aiming skills while providing a platform to record their progress. We are passionate about delivering a product that caters to the needs of a varied user base and contributes to their gaming experience.
 <hr/>
 
 ## Technology Description
@@ -44,7 +44,6 @@ Link to architectural diagram mapping and design: https://www.figma.com/file/mh7
 9. Session
 10. Pause & continue (client side)
 11. Stop & Quit (client side)
-12. Break performance history
 <hr/>
 
 ## Endpoints Documentation

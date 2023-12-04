@@ -33,7 +33,6 @@ Link to architectural diagram mapping and design: https://www.figma.com/file/mh7
 <hr/>
 
 ## Functions
-
 1. Login
 2. Logout
 3. Profile
@@ -48,28 +47,102 @@ Link to architectural diagram mapping and design: https://www.figma.com/file/mh7
 12. Break performance history
 <hr/>
 
-## Endpoints
+## Endpoints Documentation
+### Overview
+This documentation details the routes used in the Node.js Express application, including the primary application setup in `app.js` and route handlers in `./routes/index.js`, `./routes/controllers/users.js`, and `./routes/controllers/game.js`.
+#### app.js
+This is the main application file where middleware and routes are set up.
 
+- **Middleware Configuration**
+  - `logger('dev')`: Provides logging capabilities.
+  - `express.json()`: Parses incoming requests with JSON payloads.
+  - `express.urlencoded({ extended: false })`: Parses incoming requests with URL-encoded payloads.
+  - `cookieParser()`: Parses cookies attached to the client request object.
+  - `express.static(...)`: Serves static files located in the `public` directory.
+  - Custom middleware to attach `models` to `req`.
 
-* USE “/user” - Navigate to user route
-* USE “/scoreboard” - Navigate to scoreboard route
-* USE “/game” - Navigate to game route
-* USE(req, res, next) - Connect database
-* POST “/game/game-result” - Send the final result of a player to the database
-* GET “/scoreboard/score” - Request all player scores from the database and send back to front-end
-* GET “/user/login” - For user to login (Azure Authentication)
-* GET “/” - Session
+- **Session Configuration**
+  - Uses `express-session` for managing session state.
+
+- **Authentication Configuration**
+  - Integrates with Microsoft Identity platform.
+
+- **Routes**
+  - GET `/login`: Initiates the login process.
+  - GET `/logout`: Logs out the user.
+  - GET `/error`: Displays a server error message.
+  - GET `/unauthorized`: Displays an unauthorized access message.
+  - `/api`: All API routes are handled by `apiRouter`.
+ 
+#### `./routes/index.js`
+This file sets up API routes.
+
+- **API Routes**
+  - `/game`: Routes related to game functionalities.
+  - `/user`: Routes for user-related functionalities.
+
+#### `./routes/controllers/users.js`
+This file contains routes for user operations.
+
+- **User Routes**
+  - GET `/get-identity`: Fetches the identity of the logged-in user.
+  - GET `/leaderboard`: Retrieves the leaderboard based on certain criteria (accuracy, number of games).
+  - GET `/get-history`: Fetches the game history of a specific user.
+  - GET `/load-user-info`: Loads user information based on the username.
+
+#### `./routes/controllers/game.js`
+This file manages routes related to game functionalities.
+
+- **Game Routes**
+  - POST `/result`: Submits and records game results.
+
+### Notes
+- Authentication and session handling are integrated across routes.
+- Error handling is included in asynchronous routes.
 <hr/>
 
-## Appendix
+## Database Schemas
+### Overview
+This documentation describes the Mongoose schemas used in the Node.js application for modeling data in MongoDB. The schemas are defined for `Game` and `Player`.
 
-Database Schema: <br>
-	{ <br>
-    “UserName”: String, <br>
-    “Email”: String, <br>
-    “Score”: Integer, <br>
-    “Accuracy”: Float <br>
-    “Date”: Date <br>
-}
+#### Game Schema
+The `Game` schema represents individual game data.
+
+- **Schema Name**: `gameSchema`
+- **Collection**: Automatically determined by Mongoose (typically 'games')
+- **Fields**:
+  - `round`: (Type: Number) Represents the round number of the game.
+  - `hit`: (Type: Number) The number of hits in the game.
+  - `seconds`: (Type: Number) Duration of the game in seconds.
+  - `accuracy`: (Type: Number) Accuracy rate in the game.
+  - `game_date`: (Type: Date) The date when the game was played.
+
+#### Player Schema
+The `Player` schema represents users of the application with their associated games.
+
+- **Schema Name**: `playerSchema`
+- **Collection**: Automatically determined by Mongoose (typically 'players')
+- **Fields**:
+  - `username`: (Type: String) Unique identifier for the player.
+  - `user`: (Type: String) The name or other identifier of the user.
+  - `games`: (Type: Array of `gameSchema`) A list of games played by the player.
+
+#### Models
+- **Player Model**: This is created from the `playerSchema` and is used to interact with the 'players' collection in the database.
+
+### Notes
+- Mongoose automatically manages the creation of collections based on these schemas.
+- The `models` object exported contains the `Player` model, which can be used throughout the application for database operations related to players and their games.
+
+### Example Usage
+To create a new player and save it to the database:
+```js
+const newPlayer = new models.Player({
+    username: 'player123',
+    user: 'John Doe',
+    games: [...]
+});
+newPlayer.save();
+```
 
 Link to architectural diagram mapping and design: https://www.figma.com/file/mh7RuMGjAAf3ShLi5Q24BT/Info-441-Final-Project?node-id=0%3A1&t=0HA6wX39E79dJt6i-0

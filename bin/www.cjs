@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const { config } = require('dotenv');
 config();
-const { set, connect } = require('mongoose');
+const { set, connect, connection } = require('mongoose');
 
 /**
  * Module dependencies.
@@ -31,9 +31,9 @@ let http = require('http');
      */
 
     set('strictQuery', true);
-    console.log('trying to connect db');
+    console.log('Trying to connect MongoDB...');
     connect(process.env.MONGODB_URI).then(() => {
-        console.log('successfully connected to mongodb');
+        console.log(`Successfully connected to MongoDB: ${connection.host}:${connection.port}/${connection.name}`);
         server.listen(port);
     });
     server.on('error', onError);

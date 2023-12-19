@@ -32,7 +32,7 @@ let http = require('http');
 
     set('strictQuery', true);
     console.log('trying to connect db');
-    connect('mongodb+srv://Russ:pa55word@cluster0.sseiyjf.mongodb.net/AimLabBasic').then(() => {
+    connect(process.env.MONGODB_URI).then(() => {
         console.log('successfully connected to mongodb');
         server.listen(port);
     });
